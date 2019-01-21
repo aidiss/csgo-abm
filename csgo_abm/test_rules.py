@@ -15,7 +15,7 @@ def test_t_wins_by_elimination():
     game = Game()
     game.t_side = [Player() for _ in range(5)]
     game.ct_side = [Player() for _ in range(5)]
-    game.end_round(winner='t', reason='elimination')
+    game.end_round(winner="t", reason="elimination")
     t_money = sum([p.money for p in game.t_side])
     assert t_money == 20250
 
@@ -25,7 +25,7 @@ def test_ct_wins_by_time():
     game = Game()
     game.t_side = [Player() for _ in range(5)]
     game.ct_side = [Player() for _ in range(5)]
-    game.end_round(winner='ct', reason='time')
+    game.end_round(winner="ct", reason="time")
     t_money = sum([p.money for p in game.ct_side])
     assert t_money == 20250
 
@@ -35,7 +35,7 @@ def test_ct_wins_by_defusal():
     game = Game()
     game.t_side = [Player() for _ in range(5)]
     game.ct_side = [Player() for _ in range(5)]
-    game.end_round(winner='ct', reason='defusal')
+    game.end_round(winner="ct", reason="defusal")
     t_money = sum([p.money for p in game.ct_side])
     assert t_money == 4000
 
@@ -45,7 +45,7 @@ def test_t_wins_by_detonation():
     game = Game()
     game.t_side = [Player() for _ in range(5)]
     game.ct_side = [Player() for _ in range(5)]
-    game.end_round(winner='t', reason='detonation')
+    game.end_round(winner="t", reason="detonation")
     t_money = sum([p.money for p in game.t_side])
     assert t_money == 4000
 
@@ -53,8 +53,8 @@ def test_t_wins_by_detonation():
 def test_award_losing_team():
     game = Game()
     game.round = 2
-    game.rounds = 't'
-    game.end_round(winner='t', reason='elimination')
+    game.rounds = "t"
+    game.end_round(winner="t", reason="elimination")
 
     # $1400 after losing the first round
     # $1900 after losing 2 rounds in a row

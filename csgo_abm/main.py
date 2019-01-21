@@ -30,11 +30,11 @@ class Player(Agent):
         self.buy_awp()
         self.buy_rifle()
         if self.hp <= 0:
-            print('dead')
+            print("dead")
             return
 
         target = choice(self.model.players)
-        if self.primary_weapon == 'awp':
+        if self.primary_weapon == "awp":
             self.kill(target)
             target.die()
             self.money += 300
@@ -51,12 +51,12 @@ class Player(Agent):
     def buy_awp(self):
         if not self.primary_weapon and self.money >= 4750:
             self.money -= 4700
-            self.primary_weapon = 'awp'
+            self.primary_weapon = "awp"
 
     def buy_rifle(self):
         if not self.primary_weapon and self.money >= 3000:
             self.money -= 3000
-            self.primary_weapon = 'rifle'
+            self.primary_weapon = "rifle"
 
     def die(self):
         self.hp = 0
@@ -75,12 +75,11 @@ class CsgoModel(Model):
         self.schedule = RandomActivation(self)
         self.players = []
         self.scoreboard = []
-        self.datacollector = DataCollector(
-            model_reporters=None,
-            agent_reporters={'money': 'money'})
+        dc = DataCollector(model_reporters=None, agent_reporters={"money": "money"})
+        self.datacollector = dc
 
         # Create agents
-        for i, team in zip(range(self.num_agents), cycle(['t', 'ct'])):
+        for i, team in zip(range(self.num_agents), cycle(["t", "ct"])):
             player = Player(i, self, team=team)
             self.schedule.add(player)
             self.players.append(player)
@@ -89,10 +88,10 @@ class CsgoModel(Model):
         return "Model"
 
     def step(self):
-        '''Advance the model by one step.'''
+        """Advance the model by one step."""
         self.datacollector.collect(self)
         self.schedule.step()
-        winner = choice(['t', 'ct'])
+        winner = choice(["t", "ct"])
         self.scoreboard.append(winner)
         for player in self.players:
             if player.team == winner:
